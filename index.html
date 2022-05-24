@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script
+    src="http://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+    });
+    </script>
+
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" 
+    rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" 
+    crossorigin="anonymous">  
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" 
+    crossorigin="anonymous"></script>  
+    <script type="text/javascript">
+        $(document).ready(function(){
+        //vamos a probar el servicio REST
+        //Mediante una llamada, mostraremos los elementos de la tabla categoria  
+        //Al hacer click en el boton se cargaran los datos
+        $("#enviar").click(function(){
+            $.get("https://www.themealdb.com/api/json/v1/1/categories.php",
+            function(data){
+                //En data capturaremos todo los datos que retorne el servicio
+                $.each(data.categories, function(i, item){
+                    //Por cada elemento agregaremos una nueva fila en la tabla categoria
+                    $("#categorias").append("<tr><td>"+item.idCategory+"</td><td>"+item.strcategory + 
+                                    "</td><td><img src="+item.strCategoryThumb+">" +
+                                    "</td><td>"+item.strCategoryDescription+"</td></tr>");
+                });
+            });
+        
+        })  
+        
+        })
+
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h3>Ejemplo,traer datos asíncronamente</h3>
+            <img src="Users/claudiosalinas/Pictures/Imagen%201.png" alt="">
+        </div>
+        <div class="row">
+            <button type="button"class="btn btn-primary"id="enviar">Traer Datos</button>
+        </div>
+        <div class="row">
+            <table class="table"id="categorias">
+              <thead>
+                       <th scope="col">#</th>
+                       <th scope="col">Nombre</th>
+                       <th scope="col">Imagen</th>
+                       <th scope="col">Descripción</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    
+            </table>
+        </div>
+    </div>
+</body>
+</html>
